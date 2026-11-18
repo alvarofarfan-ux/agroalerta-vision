@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroAlerta Vision - Economía Agrícola</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans p-4 md:p-8">
+  <main class="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
+    <header class="text-center mb-6">
+      <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">ECONOMÍA Y AGRO</span>
+      <h1 class="text-2xl font-extrabold text-slate-900 mt-2">AgroAlerta Vision</h1>
+      <p class="text-sm text-slate-500">Detección temprana de daños por humedad y cálculo de impacto económico</p>
+    </header>
+
+    <section class="flex flex-col items-center">
+      <div id="webcam-container" class="rounded-xl overflow-hidden border-4 border-emerald-600 bg-slate-900 w-64 h-64 flex items-center justify-center">
+        <span class="text-slate-400 text-sm text-center px-4">Presiona iniciar para encender el escáner</span>
+      </div>
+      <div id="label-container" class="mt-3 font-semibold text-base text-slate-700"></div>
+    </section>
+
+    <section class="mt-6 grid grid-cols-2 gap-3">
+      <div>
+        <label class="block text-xs font-bold text-slate-600 mb-1">Cultivo</label>
+        <select id="cultivo" class="w-full border rounded-lg p-2 text-sm">
+          <option value="limon">Limón Sutil</option>
+          <option value="mango">Mango Kent</option>
+          <option value="arroz">Arroz</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-slate-600 mb-1">Hectáreas afectadas</label>
+        <input id="hectareas" type="number" value="2" min="0.5" step="0.5" class="w-full border rounded-lg p-2 text-sm">
+      </div>
+    </section>
+
+    <div class="mt-6 flex gap-3">
+      <button onclick="iniciarCamara()" class="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition">
+        1. Activar Escáner
+      </button>
+      <button onclick="evaluarImpacto()" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl transition">
+        2. Calcular Pérdida
+      </button>
+    </div>
+
+    <section id="panel-resultado" class="hidden mt-6 p-4 rounded-xl bg-amber-50 border border-amber-300">
+      <h2 class="font-bold text-amber-900 text-sm uppercase">Reporte Económico Generado</h2>
+      <p id="texto-resultado" class="text-sm text-slate-700 mt-2"></p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
